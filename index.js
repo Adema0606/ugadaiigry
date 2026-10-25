@@ -6,33 +6,47 @@
 
 let userWins = 0;
 let computerWins = 0;
+let maxNumber = 50; // Выносим максимальное число в переменную
 
 while (true) {
-    const userInput = prompt(`Угадай число от 1 до 50`);
+    const userInput = prompt(`Угадай число от 1 до ${maxNumber}. \nВведите "изменить", чтобы поменять диапазон`);
 
-    if (userInput === null) break
+    if (userInput === null) break;
+    
+    if (userInput === "изменить") {
+        let userChange = +prompt("Введите число до скольки загадывать:");
+        while (isNaN(userChange) || userChange < 1) {
+            userChange = +prompt("Введите корректное число (больше 0):");
+        }
+        maxNumber = userChange; // Обновляем максимальное число
+        alert(`Диапазон изменен! Теперь играем от 1 до ${maxNumber}`);
+        continue; // Пропускаем остальной код и начинаем цикл заново
+    }
+  
     const userNumber = parseInt(userInput, 10);
 
-    if (isNaN(userNumber) || userNumber < 1 || userNumber > 50) {
-        alert("Введите корректное число");
+    // Проверяем на maxNumber, а не на 50
+    if (isNaN(userNumber) || userNumber < 1 || userNumber > maxNumber) {
+        alert(`Введите корректное число от 1 до ${maxNumber}`);
         continue; 
     }
 
-    const computerNumber = Math.floor(Math.random() * 50) + 1;
+    // Генерируем число
+    const computerNumber = Math.floor(Math.random() * maxNumber) + 1;
 
     // Проверяем результаты 
     if (userNumber === computerNumber) {
         userWins++;
-        alert(`Вы легенда! Счет ${userNumber}:${computerNumber}.`);
+        alert(`Вы легенда! Счет ${userWins}:${computerWins}.`);
     } else {
         computerWins++;
-        alert(`Вы туту. Счет ${userNumber}:${computerNumber}.`);
+        alert(`Вы туту! Счет ${userWins}:${computerWins}.`);
     }
 }
 
 //2 задание добавить чтобы я вписывала в окно слово  (изменить)  и могла изменить максимальное число потом предлагалось изменит на число которое я выберу 
 
-// добавить 10 жизней закоторые нужно угадать число
+// 3 добавить 10 жизней закоторые нужно угадать число
 
 
 
