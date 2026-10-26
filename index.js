@@ -4,64 +4,93 @@
 // На выходе мы должны пользователю показать результат выйграл он или нет
 // Так же нужно вести учет побед компьютера и пользователя.
 
+// let userWins = 0;
+// let computerWins = 0;
+// let maxNumber = 50; // Выносим максимальное число в переменную
+
+// while (true) {
+//     const userInput = prompt(`Угадай число от 1 до ${maxNumber}. \nВведите "изменить", чтобы поменять диапазон`);
+
+//     if (userInput === null) break;
+    
+//     if (userInput === "изменить") {
+//         let userChange = +prompt("Введите число до скольки загадывать:");
+//         while (isNaN(userChange) || userChange < 1) {
+//             userChange = +prompt("Введите корректное число (больше 0):");
+//         }
+//         maxNumber = userChange; // Обновляем максимальное число
+//         alert(`Диапазон изменен! Теперь играем от 1 до ${maxNumber}`);
+//         continue; // Пропускаем остальной код и начинаем цикл заново
+//     }
+  
+//     const userNumber = parseInt(userInput, 10);
+
+//     // Проверяем на maxNumber, а не на 50
+//     if (isNaN(userNumber) || userNumber < 1 || userNumber > maxNumber) {
+//         alert(`Введите корректное число от 1 до ${maxNumber}`);
+//         continue; 
+//     }
+
+//     // Генерируем число
+//     const computerNumber = Math.floor(Math.random() * maxNumber) + 1;
+
+//     // Проверяем результаты 
+//     if (userNumber === computerNumber) {
+//         userWins++;
+//         alert(`Вы легенда! Счет ${userWins}:${computerWins}.`);
+//     } else {
+//         computerWins++;
+//         alert(`Вы туту! Счет ${userWins}:${computerWins}.`);
+//     }
+// }
+
 //2 задание добавить чтобы я вписывала в окно слово  (изменить)  и могла изменить максимальное число потом предлагалось изменит на число которое я выберу 
 
 // 3 добавить 10 жизней закоторые нужно угадать число
 
 
+
 let userWins = 0;
 let computerWins = 0;
-let maxNumber = 50; 
-let lives = 10; 
+let lives = 10; // Добавила жизни
 
-let computerNumber = Math.floor(Math.random() * maxNumber) + 1;
+// Загадываем первое число для текущего раунда
+let computerNumber = Math.floor(Math.random() * 50) + 1;
 
 while (true) {
-    const userInput = prompt(`Угадай число от 1 до ${maxNumber}. 
-        \nУ вас ${lives} жизней.
-        \nВведите "изменить", чтобы поменять диапазон.`);
+    const userInput = prompt(`Угадай число от 1 до 50. \nУ вас ${lives} жизней.`);
 
     if (userInput === null) break;
     
-    if (userInput === "изменить") {
-        let userChange = +prompt("Введите число до скольки загадывать:");
-        while (isNaN(userChange) || userChange < 1) {
-            userChange = +prompt("Введите корректное число:");
-        }
-        maxNumber = userChange; 
-        
-        lives = 10;
-        computerNumber = Math.floor(Math.random() * maxNumber) + 1;
-        
-        alert(`Диапазон изменен! Теперь играем от 1 до ${maxNumber}.`);
-        continue; 
-    }
-    
     const userNumber = parseInt(userInput, 10);
 
-    if (isNaN(userNumber) || userNumber < 1 || userNumber > maxNumber) {
-        alert(`Введите корректное число от 1 до ${maxNumber}`);
+    if (isNaN(userNumber) || userNumber < 1 || userNumber > 50) {
+        alert("Введите корректное число");
         continue; 
     }
 
+    // Проверяем результаты 
     if (userNumber === computerNumber) {
         userWins++;
         alert(`Вы легенда! Счет побед ${userWins}:${computerWins}.`);
         
+        // Игрок победил
         lives = 10;
-        computerNumber = Math.floor(Math.random() * maxNumber) + 1;
+        computerNumber = Math.floor(Math.random() * 50) + 1;
         
     } else {
-        lives--; 
+        lives--; // Отнимаем жизнь за неправильный ответ
         
         if (lives === 0) {
             computerWins++;
-            alert(`Вы проиграли! Компьютер загадал ${computerNumber}. Счет побед ${userWins}:${computerWins}.`);
+            alert(`Вы проиграли! Счет побед ${userWins}:${computerWins}.`);
             
+            // Игрок проиграл
             lives = 10;
-            computerNumber = Math.floor(Math.random() * maxNumber) + 1;
+            computerNumber = Math.floor(Math.random() * 50) + 1;
         } else {
-            alert(`Вы туту. Компьютер загадал: ${computerNumber} \nОсталось жизней: ${lives}.`);
+            alert(`Вы туту. Компьтер загадал: ${computerWins} \nОсталось жизней: ${lives}.`);
         }
     }
 }
+
